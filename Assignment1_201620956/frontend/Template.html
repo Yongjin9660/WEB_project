@@ -2,9 +2,48 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Assignment - 201620956</title>
+    <title>Assignment1 - 201620956</title>
+    <style type="text/css">
+        *{
+            max-width: 1000px;
+        }
+        .dir{
+            background-color: burlywood;
+        }
+        .fil{
+            background-color: skyblue;
+        }
+    </style>
 </head>
 <body>
-    <form></form>
+    <form action="/mkdir" method="POST" style="display: inline;">
+       <input type="text" name="title" placeholder="Directory_name">
+       <input type="submit" value="mkdir">
+    </form>
+    <form action="/mkdir" method="POST"  style="display: inline; margin-left: 20px;">
+        <input type="text" name="title" placeholder="file_name">
+        <textarea name="description" placeholder="file_description" cols="30" rows="2"></textarea>
+        <input type="submit">
+     </form>
+
+
+    <ul>%</ul>
+  
+    <h2>?</h2>
+    <p>$</p>
+    <script type="text/javascript">
+        function readFile(name){
+            var form = document.createElement('form');
+            form.method = 'post';
+            form.action = "http://localhost:3000/readfile";
+            var hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = 'file_name';
+            hiddenField.value = name.textContent;
+            form.appendChild(hiddenField);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
 </body>
 </html>
