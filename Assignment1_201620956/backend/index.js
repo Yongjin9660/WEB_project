@@ -26,10 +26,8 @@ var app = http.createServer(function(request, response){
                         if(stat.isDirectory() === true){
                             temp = "<tr class=\"dir\">";
                             temp += "<th onclick='changeDir(this);'>"+ element + "</th>";
-                            //temp += "<th onclick='DeleteDir(this);'>"+ "delete" + "</th>";
-                            //temp += `<th><input type=\"button\" value=\"delete\" onclick=\'DeleteDir(this);\' ></th>`;
                             temp += "<th><button onclick=\'DeleteDir(\"" + element + "\");\'>delete</button></th>";
-                            temp += "<th>"+ "rename" + "</th>";
+                            temp += "<th><button onclick=\'Rename(\"" + element + "\");\'>rename</button></th>";
                             if(stat.size === 0) temp += "<th> - </th>";
                             else temp += "<th>"+ stat.size + " B</th>";
                             temp += "<th>"+ stat.mtime.toLocaleDateString() + "</th>";
@@ -38,8 +36,8 @@ var app = http.createServer(function(request, response){
                         }else{
                             temp = "<tr class=\"fil\">";
                             temp += "<th onclick='readFile(this);'>"+ element + "</th>";
-                            temp += "<th>"+ "delete" + "</th>";
-                            temp += "<th>"+ "rename" + "</th>";
+                            temp += "<th><button onclick=\'DeleteFile(\"" + element + "\");\'>delete</button></th>";
+                            temp += "<th><button onclick=\'Rename(\"" + element + "\");\'>rename</button></th>";
                             if(stat.size === 0) temp += "<th> - </th>";
                             else temp += "<th>"+ stat.size + " B</th>";
                             temp += "<th>"+ stat.mtime.toLocaleDateString() + "</th>";
@@ -56,7 +54,6 @@ var app = http.createServer(function(request, response){
                 response.writeHead(200);
                 response.end(html);
             });
-            
         });
     }else if(pathname === '/editfile'){
         var body = '';
@@ -136,9 +133,34 @@ var app = http.createServer(function(request, response){
         response.writeHead(302, {Location: `/`});
         response.end();
     }else if(pathname === '/rmFile'){
-
+        var body = '';
+        request.on('data', function(data){
+            body += data;
+        });
+        request.on('end', function(){
+            var post = qs.parse(body);
+            var file_name = post.file_name;
+            var file_Path = path.join(cur_path, file_name);
+            fs.unlink(file_Path, function(err){
+                if(err) console.log(err);
+            })
+        });
+        response.writeHead(302, {Location: `/`});
+        response.end();
     }else if(pathname === '/rename'){
-
+        var body = '';
+        request.on('data', function(data){
+            body += data;
+        });
+        request.on('end', function(){
+            var post = qs.parse(body);
+            var dirname = post.dir_name;
+            fs.rename(dirPath, function(err){
+                if(err) console.log(err);
+            })
+        });
+        response.writeHead(302, {Location: `/`});
+        response.end();
     }else{
         response.writeHead(404);
         response.end('Not found');
