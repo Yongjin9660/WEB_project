@@ -19,6 +19,10 @@
             border-left: none; 
             border-right: none;
         }
+        button{
+            border: none;
+            background-color: transparent;
+        }
     </style>
 </head>
 <body>
@@ -33,7 +37,7 @@
     </form>
     <form action="http://localhost:3000/rename" method="POST" style="display: inline; margin-left: 20px;">
         <input id="original_name" type="hidden" name="id">
-        <input id="new_name" type="text" name="new_name">
+        <input id="new_name" type="text" name="new_name" placeholder="rename">
         <input type="submit" value="rename">
     </form>
 
@@ -48,13 +52,6 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="dir">
-                <th onclick='changeDir(this);'>..</th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
             <tr>%</tr>
         </tbody>
     </table>

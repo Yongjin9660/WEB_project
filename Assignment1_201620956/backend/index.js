@@ -17,7 +17,15 @@ var app = http.createServer(function(request, response){
             if(err) console.log(err);
             fs.readdir(cur_path, function(err ,data){
                 if(err) console.log(err);
-                var list = "";
+                var list = `
+                    <tr class=\"dir\">
+                    <th onclick=\'changeDir(this);\'>..</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    </tr>
+                `;
                 var temp = "";
                 data.forEach(function(element){
                     var t_path = path.join(cur_path, element);
@@ -62,7 +70,6 @@ var app = http.createServer(function(request, response){
         });
         request.on('end', function(){
             var post = qs.parse(body);
-            console.log(post);
             var title = post.title;
             var description = post.description;
             var f_path = path.join(cur_path, title);
@@ -72,7 +79,6 @@ var app = http.createServer(function(request, response){
         });
         response.writeHead(302, {Location: `/`});
         response.end();
-
     }else if(pathname === '/cd'){
         var body = '';
         request.on('data', function(data){
@@ -96,7 +102,6 @@ var app = http.createServer(function(request, response){
             file_name = post.file_name;
             var file_path = path.join(cur_path, file_name);
             fs.readFile(file_path, 'utf8', function(err, data){
-                console.log(file_path);
                 file_content = data;
                 response.writeHead(302, {Location: `http://localhost:3000/`});
                 response.end();
@@ -154,7 +159,6 @@ var app = http.createServer(function(request, response){
         });
         request.on('end', function(){
             var post = qs.parse(body);
-            console.log(post);
             var original_name = post.id;
             var new_name = post.new_name;
             var file_Path = path.join(cur_path, original_name);
