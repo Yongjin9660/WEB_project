@@ -154,8 +154,12 @@ var app = http.createServer(function(request, response){
         });
         request.on('end', function(){
             var post = qs.parse(body);
-            var dirname = post.dir_name;
-            fs.rename(dirPath, function(err){
+            console.log(post);
+            var original_name = post.id;
+            var new_name = post.new_name;
+            var file_Path = path.join(cur_path, original_name);
+            var new_path = path.join(cur_path, new_name);
+            fs.rename(file_Path, new_path, function(err){
                 if(err) console.log(err);
             })
         });
