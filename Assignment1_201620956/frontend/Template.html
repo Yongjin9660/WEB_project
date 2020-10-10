@@ -13,6 +13,15 @@
         .fil{
             background-color: skyblue;
         }
+        table{border-collapse: collapse;}
+        th{
+            text-align: left;
+        }
+        tr{ 
+            border: 1px solid;
+            border-left: none; 
+            border-right: none;
+        }
     </style>
 </head>
 <body>
@@ -20,26 +29,68 @@
        <input type="text" name="title" placeholder="Directory_name">
        <input type="submit" value="mkdir">
     </form>
-    <form action="/mkdir" method="POST"  style="display: inline; margin-left: 20px;">
+    <form action="/editfile" method="POST" style="display: inline; margin-left: 20px;">
         <input type="text" name="title" placeholder="file_name">
         <textarea name="description" placeholder="file_description" cols="30" rows="2"></textarea>
-        <input type="submit">
-     </form>
+        <input type="submit" value="editfile">
+    </form>
 
-
-    <ul>%</ul>
-  
+    <table width="1000">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th></th>
+                <th></th>
+                <th>file size</th>
+                <th>Modification date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="dir">
+                <th onclick='changeDir(this);'>..</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>%</tr>
+        </tbody>
+    </table>
     <h2>?</h2>
     <p>$</p>
     <script type="text/javascript">
-        function readFile(name){
+        function readFile(file){
             var form = document.createElement('form');
             form.method = 'post';
             form.action = "http://localhost:3000/readfile";
             var hiddenField = document.createElement('input');
             hiddenField.type = 'hidden';
             hiddenField.name = 'file_name';
-            hiddenField.value = name.textContent;
+            hiddenField.value = file.textContent;
+            form.appendChild(hiddenField);
+            document.body.appendChild(form);
+            form.submit();
+        }
+        function changeDir(input){
+            var form = document.createElement('form');
+            form.method = 'post';
+            form.action = "http://localhost:3000/cd";
+            var hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = 'dir_name';
+            hiddenField.value = input.textContent;
+            form.appendChild(hiddenField);
+            document.body.appendChild(form);
+            form.submit();
+        }
+        function DeleteDir(input){
+            var form = document.createElement('form');
+            form.method = 'post';
+            form.action = "http://localhost:3000/rmdir";
+            var hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = 'dir_name';
+            hiddenField.value = input;
             form.appendChild(hiddenField);
             document.body.appendChild(form);
             form.submit();

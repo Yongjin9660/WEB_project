@@ -14,36 +14,78 @@ var app = http.createServer(function(request, response){
 
     if(pathname === '/'){
         fs.readFile("../frontend/template.html", function(err, tmpl){
-            if(err){ console.log("HTML load Error!"); }
-            
+            if(err) console.log(err);
             fs.readdir(cur_path, function(err ,data){
-                if(err){ console.log("cur_path load Error!"); }
-                var list = "<ul style=\"list-style: none;\">";
-                
+                if(err) console.log(err);
+                var list = "";
+                var temp = "";
                 data.forEach(function(element){
-                    list += "<li onclick='readFile(this);'>"+ element + "</li>";
+                    var t_path = path.join(cur_path, element);
+                    try{
+                        const stat = fs.statSync(t_path);
+                        if(stat.isDirectory() === true){
+                            temp = "<tr class=\"dir\">";
+                            temp += "<th onclick='changeDir(this);'>"+ element + "</th>";
+                            //temp += "<th onclick='DeleteDir(this);'>"+ "delete" + "</th>";
+                            //temp += `<th><input type=\"button\" value=\"delete\" onclick=\'DeleteDir(this);\' ></th>`;
+                            temp += "<th><button onclick=\'DeleteDir(\"" + element + "\");\'>delete</button></th>";
+                            temp += "<th>"+ "rename" + "</th>";
+                            if(stat.size === 0) temp += "<th> - </th>";
+                            else temp += "<th>"+ stat.size + " B</th>";
+                            temp += "<th>"+ stat.mtime.toLocaleDateString() + "</th>";
+                            temp += "</tr>";
+                            list += temp;
+                        }else{
+                            temp = "<tr class=\"fil\">";
+                            temp += "<th onclick='readFile(this);'>"+ element + "</th>";
+                            temp += "<th>"+ "delete" + "</th>";
+                            temp += "<th>"+ "rename" + "</th>";
+                            if(stat.size === 0) temp += "<th> - </th>";
+                            else temp += "<th>"+ stat.size + " B</th>";
+                            temp += "<th>"+ stat.mtime.toLocaleDateString() + "</th>";
+                            temp += "</tr>";
+                            list += temp;
+                        }
+                    }catch(err){
+                        console.log(err);
+                    }
                 });
-
-                // for(var i=0 ; i < data.length ; i++){
-                //     list += `<li onclick='readFile(this);'>${data[i]}</li>`;
-                // }
-                list += "</ul>";
-                var html = tmpl.toString().replace('<ul>%</ul>', list);
+                var html = tmpl.toString().replace('<tr>%</tr>', list);
                 html = html.replace('?', file_name);
                 html = html.replace('$', file_content);
                 response.writeHead(200);
                 response.end(html);
-
             });
             
         });
     }else if(pathname === '/editfile'){
-
+        var body = '';
+        request.on('data', function(data){
+            body += data;
+        });
+        request.on('end', function(){
+            var post = qs.parse(body);
+            console.log(post);
+            var title = post.title;
+            var description = post.description;
+            var f_path = path.join(cur_path, title);
+            fs.writeFile(f_path, description, function(err){
+                if(err) console.log(err);
+            })
+        });
         response.writeHead(302, {Location: `/`});
         response.end();
 
     }else if(pathname === '/cd'){
-
+        var body = '';
+        request.on('data', function(data){
+            body += data;
+        });
+        request.on('end', function(){
+            var post = qs.parse(body);
+            var dir_name = post.dir_name;
+            cur_path = path.join(cur_path, dir_name);
+        });
         response.writeHead(302, {Location: `/`});
         response.end();
 
@@ -79,7 +121,20 @@ var app = http.createServer(function(request, response){
         response.writeHead(302, {Location: `/`});
         response.end();
     }else if(pathname === '/rmdir'){
-
+        var body = '';
+        request.on('data', function(data){
+            body += data;
+        });
+        request.on('end', function(){
+            var post = qs.parse(body);
+            var dirname = post.dir_name;
+            var dirPath = path.join(cur_path, dirname);
+            fs.rmdir(dirPath, function(err){
+                if(err) console.log(err);
+            })
+        });
+        response.writeHead(302, {Location: `/`});
+        response.end();
     }else if(pathname === '/rmFile'){
 
     }else if(pathname === '/rename'){
