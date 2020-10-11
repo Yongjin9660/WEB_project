@@ -13,7 +13,7 @@ var app = http.createServer(function(request, response){
     var pathname = url.parse(_url, true).pathname;
 
     if(pathname === '/'){
-        fs.readFile("../frontend/template.html", function(err, tmpl){
+        fs.readFile("../frontend/Template.html", function(err, tmpl){
             if(err) console.log(err);
             fs.readdir(cur_path, function(err ,data){
                 if(err) console.log(err);
@@ -36,8 +36,7 @@ var app = http.createServer(function(request, response){
                             temp += "<th onclick='changeDir(this);'>"+ element + "</th>";
                             temp += "<th><button onclick=\'DeleteDir(\"" + element + "\");\'>delete</button></th>";
                             temp += "<th><button onclick=\'Rename(\"" + element + "\");\'>rename</button></th>";
-                            if(stat.size === 0) temp += "<th> - </th>";
-                            else temp += "<th>"+ stat.size + " B</th>";
+                            temp += "<th> - </th>";
                             temp += "<th>"+ stat.mtime.toLocaleDateString() + "</th>";
                             temp += "</tr>";
                             list += temp;
@@ -46,8 +45,7 @@ var app = http.createServer(function(request, response){
                             temp += "<th onclick='readFile(this);'>"+ element + "</th>";
                             temp += "<th><button onclick=\'DeleteFile(\"" + element + "\");\'>delete</button></th>";
                             temp += "<th><button onclick=\'Rename(\"" + element + "\");\'>rename</button></th>";
-                            if(stat.size === 0) temp += "<th> - </th>";
-                            else temp += "<th>"+ stat.size + " B</th>";
+                            temp += "<th>"+ stat.size + " B</th>";
                             temp += "<th>"+ stat.mtime.toLocaleDateString() + "</th>";
                             temp += "</tr>";
                             list += temp;
