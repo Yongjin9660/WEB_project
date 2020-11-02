@@ -7,7 +7,52 @@ a {
   color: #00B7FF;
 }
 
-.image{
+.poster{
   width: 165px;
   height: 600px;
+  margin-left: 100px;
+}
+.input{
+  text-align: center;
+  margin-left: 70px;
+}
+#regi{
+  margin-left: 90px;
+  text-decoration: solid;
+}
+#intro{
+  margin-left: 12px;
+}
+#rating{
+  margin-left: 103px;
+  text-decoration: solid;
+}
+#rb{
+  margin-left: 60px;
+}
+#btn1{
+  margin-left: 115px;
+}
+.star{
+  width: 30px;
+  height: 30px;
+}
+#result_title{
+  margin-left: 105px;
+}
+#result_genre{
+  margin-left:145px;
+}
+#result_cast{
+  margin-left:96px;
+}
+#first_start{
+  margin-left: 100px;
+}
+.line{
+  width: 380px;
+}
+button{
+  margin-left: 139px;
+  border-style: none;
 }

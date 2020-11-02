@@ -18,16 +18,11 @@ function loadImage(path){
 
 router.post('/', function(req, res) {
   var post = req.body;
-  var url = post.url;
-  //console.log(url);
-  var newPath = path.join('./public', url);
-  console.log(newPath);
-
-  //const data = loadImage(newPath);
-  //console.log(data);
-
-  loadImage(newPath).then(function(){
-    res.render('result', {title : post.title, cast : post.cast, genre : post.genre, url:newPath});
+  var tempUrl = post.url;
+  var imagePath = path.join(__dirname, '../public', tempUrl);
+  
+  loadImage(imagePath).then(function(){
+    res.render('result', {movie_title : post.title, cast : post.cast, genre : post.genre, url:post.url, score:post.score});
   });
 });
 

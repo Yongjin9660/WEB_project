@@ -1,8 +1,27 @@
 extends layout
 
 block content
-  img(src=url)
-  h1= title
-  h2= cast
-  h3= genre
-  h1= url
+  img(src=url class='poster')
+  #result_title
+    h1= movie_title
+  .line
+    hr
+  #result_cast
+    p= cast
+  #result_genre
+    p= genre
+  .line
+    hr
+  -for(var idx=0; idx<score; idx++)
+    -if(idx===0)
+      img(src='/images/star.svg' class='star' id="first_start")
+    -else
+      img(src='/images/star.svg' class='star')
+  .line
+    hr
+  button(onclick="move()") GO_Home
+
+  script.
+    function move() {
+      window.location.href = '/'
+    }

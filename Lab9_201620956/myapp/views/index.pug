@@ -2,36 +2,55 @@ extends layout
 
 block content
   h1= title
-  h3 Register Movie
-  h5 Please enter the movie information to add a review.
-  form(action='/result' method='post')
+  #regi
+    h3 Register Movie
+  #intro
+    h5 Please enter the movie information to add a review.
+  form(action='/result' method='post' name="form" onsubmit="return required()")
     p
-      input(type="text" name="title")
+      input(type="text" name="title" class='input')
     p
-      input(type="text" name="cast")
+      input(type="text" name="cast" class='input')
     p
-      input(type="text" name="genre")
+      input(type="text" name="genre" class='input')
     p
-      input(type="text" name="url")
-    p
-      ='Movie Ratings'
-    span
-      span='0'
-      input(type='radio' name='score' value='0')
-    span
-      span='1'
-      input(type="radio" name="score" value="1")
-    span
-      span='2'
-      input(type="radio" name="score" value="2")
-    span
-      span='3'
-      input(type="radio" name="score" value="3")
-    span
-      span='4'
-      input(type="radio" name="score" value="4")
-    span
-      span='5'
-      input(type="radio" name="score" value="5")
-    p
-      input(type="submit" value="Submit")
+      input(type="text" name="url" class='input')
+    #rating
+      p
+        ='Movie Ratings'
+    #rb    
+      span  
+        span='0'
+        input(type='radio' name='score' value='0')
+      span
+        span='1'
+        input(type="radio" name="score" value="1")
+      span
+        span='2'
+        input(type="radio" name="score" value="2")
+      span
+        span='3'
+        input(type="radio" name="score" value="3")
+      span
+        span='4'
+        input(type="radio" name="score" value="4")
+      span
+        span='5'
+        input(type="radio" name="score" value="5")
+    #btn1
+      p
+        input(type="submit" value="Submit")
+  script.
+    function required() {
+      var empt = document.forms.form.title.value;
+      var empt1 = document.forms.form.cast.value;
+      var empt2 = document.forms.form.genre.value;
+      var empt3 = document.forms.form.url.value;
+      var empt4 = document.forms.form.score.value;
+      
+      if(empt == "" || empt1 == "" || empt2 == "" || empt3 == "" || empt4 == ""){
+        alert("Please input a value");
+        return false;
+      }
+      return true;
+    }
