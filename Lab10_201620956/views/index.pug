@@ -1,5 +1,11 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  each movie in movies
+    div.div_img
+      img(src=movie.url class='poster')
+    hr
+    p.title_year
+      span= movie.title
+      span= '  /  ' + movie.year
+    hr

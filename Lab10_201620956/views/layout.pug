@@ -1,7 +1,13 @@
 doctype html
 html
   head
-    title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    nav
+      form(action='/' method='get' name="form1" class='navbar')
+        input(type="submit" value="Home")
+      form(action='/newmovie' method='get' name="form2" class='navbar')
+        input(type="submit" value="New Movie")
+    br
     block content
+

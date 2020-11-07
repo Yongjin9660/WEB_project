@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    h1 Add Movie
+    form(action='/routes/movie/create' method='post' name="form")
+        div.addForm
+            label Title
+            br
+            input(type="text" name="title")
+            br
+            label Year
+            br
+            input(type="text" name="year")
+            br
+            label Image Path
+            br
+            input(type="text" name="url")
+            br
+            input(type="submit" value="Add Movie")
