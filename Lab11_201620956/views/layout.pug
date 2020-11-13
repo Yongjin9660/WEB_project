@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src="/javascripts/main.js")
+  body
+    nav
+      form(action='/' method='get' name="form1" class='navbar')
+        input(type="submit" value="Home")
+      form(action='/newmovie' method='get' name="form2" class='navbar')
+        input(type="submit" value="New Movie")
+      form(action="/admin" method='get' name="form3" class='navbar')
+        input(type="submit" value="Admin")
+    br
+    block content
+

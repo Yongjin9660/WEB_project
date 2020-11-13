@@ -1,0 +1,61 @@
+body {
+  padding: 30px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+nav{
+  align-content: center;
+  text-align: center;
+  background-color: black;
+}
+.navbar{
+  display: inline;
+}
+.div_img{
+  text-align: center;
+}
+input[type=submit]{
+  font-size: large;
+  display: inline;
+  background-color: black; 
+  color: white;
+  border-style: none;
+  cursor: pointer;
+}
+input[type=text]{
+  font-size: large;
+  display: inline;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.title_year{
+  text-align: center;
+  margin-left: 30px;
+  font-size: large;
+  font-weight: bold;
+}
+
+hr{
+  margin: 0px;
+}
+
+h1{
+  text-align: center;
+  margin-bottom: 10px;
+}
+.addForm{
+  text-align: center;
+}
+label{
+  margin-top: 15px;
+  font-size: x-large;
+  font-weight: normal;
+}
+.poster{
+  width: 500px;
+  height: 650px;
+}

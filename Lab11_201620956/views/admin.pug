@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  each movie in movies
+    div(id="movie" + movie._id)
+        -var cnt = 0;
+        div.div_img
+        img(src=movie.url class='poster')
+        hr
+        p.title_year
+        span= movie.title
+        span= '  /  ' + movie.year
+        input(type="button" onclick="ajaxDelete("+ movie._id +")" value="Delete By AJAX")
+        hr
