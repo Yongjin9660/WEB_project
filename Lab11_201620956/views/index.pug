@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  h1 Movies
   each movie in movies
     div(id="movie" + movie._id)
       div.div_img
@@ -10,3 +11,18 @@ block content
         span= movie.title
         span= '  /  ' + movie.year
       hr
+
+  div(id="trendingM")
+    img(src="/images/star.svg" id="trendingStar")
+    h1(id="trh") Trending Movies
+    img(src="/images/star.svg" id="trendingStar")
+  each movie in movie2
+    -if(movie.trending == true)
+      div.div_img
+        img(src=movie.url class='poster')
+        hr
+        p.title_year
+          span= movie.title
+          span= '  /  ' + movie.year
+        hr
+

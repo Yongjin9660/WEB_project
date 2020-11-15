@@ -5,7 +5,7 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
   Movie.find({}).then((movies)=>{
-    res.render('index', {movies : movies});
+    res.render('index', {movies : movies, movie2 : movies});
   }).catch((err)=>{
     console.log(err);
   })

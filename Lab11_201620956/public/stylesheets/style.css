@@ -38,12 +38,20 @@ input[type=text]{
   font-size: large;
   font-weight: bold;
 }
+.admin_title{
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  font-size: large;
+  font-weight: bold;
+}
 
 hr{
   margin: 0px;
 }
 
 h1{
+  margin-top: 2px;
   text-align: center;
   margin-bottom: 10px;
 }
@@ -59,6 +67,39 @@ label{
   width: 500px;
   height: 650px;
 }
+.delete{
+  font-size: large;
+  display: inline;
+  background-color: black; 
+  color: white;
+  border-style: none;
+  cursor: pointer;
+}
+.edit{
+  font-size: large;
+  display: inline;
+  background-color: black; 
+  color: white;
+  border-style: none;
+  cursor: pointer;
+  margin-left: 2px;
+}
 .star{
-  width: 40px
+  margin-left: 10px;
+  width: 25px
+}
+.btn{
+  text-align: center;
+  margin-bottom: 5px;
+}
+#trendingStar{
+  width: 30px;
+}
+#trendingM{
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#trh{
+  display: inline;
 }
