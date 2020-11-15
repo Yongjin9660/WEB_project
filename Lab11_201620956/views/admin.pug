@@ -1,14 +1,23 @@
 extends layout
 
 block content
-  each movie in movies
-    div(id="movie" + movie._id)
-        -var cnt = 0;
+  div(id='movie_list')
+    each movie in movies
+      div(id = "movie" + movie._id)
         div.div_img
-        img(src=movie.url class='poster')
+          img(src = movie.url class='poster')
         hr
         p.title_year
-        span= movie.title
-        span= '  /  ' + movie.year
-        input(type="button" onclick="ajaxDelete("+ movie._id +")" value="Delete By AJAX")
+          span= movie.title
+          span= '  /  ' + movie.year
+        input(type="button" onclick="ajaxDelete("+ movie._id +")" value="Delete")
+        input(type="button" onclick="ajaxEdit(" + movie._id + ")" value="EDIT")
+
+        -if(movie.trending == true)
+          img(src="/images/star.svg" onclick="ajaxStar(" + movie._id + ")" id="star"+movie._id class="star")
+        -else
+          img(src="/images/black-star.svg" onclick="ajaxStar(" + movie._id + ")" id="star"+movie._id class="star")
+
         hr
+
+  p(id='editfile')

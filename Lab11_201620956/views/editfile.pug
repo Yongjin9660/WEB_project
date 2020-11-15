@@ -1,0 +1,18 @@
+
+block content
+    h1 Edit Movie
+    form(action='/routes/movie/update/'+id method='post' name="form")
+        div.editform
+            label Title
+            br
+            input(type="text" name="title" value=title)
+            br
+            label Year
+            br
+            input(type="text" name="year" value=year)
+            br
+            label Image Path
+            br
+            input(type="text" name="url" value=url)
+            br
+            input(type="submit" value="Edit Movie")

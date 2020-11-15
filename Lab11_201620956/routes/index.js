@@ -16,12 +16,17 @@ router.get('/newmovie', function(req, res, next) {
 });
 
 router.get('/admin', function(req, res, next){
-  Movie.find({}).then((movies)=>{
-    res.render('admin', {movies : movies});
+  Movie.find({}).then((movie)=>{
+    res.render('admin', {movies : movie});
   }).catch((err)=>{
     console.log(err);
   })
 });
+
+router.get('/editfile', function(req, res, next){
+  res.render('editfile');
+});
+
 
 module.exports = router;
 

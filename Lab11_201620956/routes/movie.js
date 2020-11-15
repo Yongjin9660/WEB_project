@@ -30,4 +30,63 @@ router.post('/routes/movie/delete/:id', (req, res, next)=>{
   });
 });
 
+router.get('/routes/movie/read/:id', (req, res, next)=>{
+  Movie.findById(req.params.id, function(err, data){
+    res.render('editfile', {title : data.title, year : data.year, url : data.url, id : req.params.id});
+  })
+});
+
+router.post('/routes/movie/update/:id', (req, res, next)=>{
+  let post = req.body;
+  console.log(post.title);
+  if (post.title == undefined) {
+    console.log('trending!');
+    Movie.findById(req.params.id).then(function (data) {
+      if (data.trending === false) {
+        Movie.findByIdAndUpdate(req.params.id, { trending: true }, function (err, result) {
+          if (err) {
+            let data = {
+              success: false
+            }
+            res.status(500).json(data);
+          }
+          else {
+            let data = {
+              success: true,
+              movie: result
+            }
+            res.status(200).json(data);
+          }
+        });
+      }
+      else {
+        Movie.findByIdAndUpdate(req.params.id, { trending: false }, function (err, result) {
+          if (err) {
+            let data = {
+              success: false
+            }
+            res.status(500).json(data);
+          } else {
+            let data = {
+              success: true,
+              movie: result
+            }
+            res.status(200).json(data);
+          }
+        });
+      }
+    });
+  }
+  else {
+    Movie.findByIdAndUpdate(req.params.id, { title: post.title, year: post.year, url: post.url }, function (err, result) {
+      if (err) {
+        console.log(err);
+      }
+      else {
+        res.redirect('/admin');
+      }
+    });
+  }
+});
+
 module.exports = router;
