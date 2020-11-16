@@ -1,6 +1,5 @@
 function ajaxDelete(id){
     var xhr = new XMLHttpRequest();
-
     xhr.onload = function(){
         //alert("삭제");
         if(xhr.status === 200 || xhr.status === 201){
@@ -12,7 +11,6 @@ function ajaxDelete(id){
             alert("삭제 실패");
         }
     }
-
     xhr.open("POST", "/routes/movie/delete/" +id);
     xhr.setRequestHeader("Content-Type", 'application/json');
     xhr.send();

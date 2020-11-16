@@ -32,7 +32,7 @@ router.post('/routes/movie/delete/:id', (req, res, next)=>{
 
 router.get('/routes/movie/read/:id', (req, res, next)=>{
   Movie.findById(req.params.id, function(err, data){
-    res.render('editfile', {title : data.title, year : data.year, url : data.url, id : req.params.id});
+    res.render('editmovie', {title : data.title, year : data.year, url : data.url, id : req.params.id});
   })
 });
 
